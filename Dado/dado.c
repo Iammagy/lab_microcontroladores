@@ -1,8 +1,5 @@
 #include <pic14/pic12f675.h>
 
-//#pragma config WDTE = OFF //watchdog off
-//#pragma config MCLRE = ON // MCLR Pin Function Select bit (MCLR pin function is MCLR, MCLR externally set)
-
 int random_number(void);
 
 void main(void)
