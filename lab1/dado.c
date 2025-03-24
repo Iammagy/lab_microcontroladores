@@ -3,19 +3,15 @@
 typedef unsigned int word ;
 word __at 0x2007 __CONFIG = (_WDTE_OFF);
 
-int random_number(void);
+unsigned int random_noise(void);
+
 
 void main(void)
 {
 
-    int number = random_number();
+    unsigned int number = random_noise();
 
-    TRISIO = 0b00000000; //pins as outputs except IO3 
 	GPIO = 0x00; //leds off initially (0V)
-    
-	//ANSEL = 0b00000001;// Usa el gp0 como analogico
-    
-    //int delay_time;
 
     while (1)
     {
@@ -52,6 +48,28 @@ void main(void)
     }
 }
 
-int random_number(void){
-    return 5;
+
+
+unsigned int random_noise(void){
+
+    TRISIO = 0b00010000; //set pin 4 as input
+	ANSEL = 0b01111000; // pin 4 as analog
+
+    ADCON0 = 0b00001101; // VCFG= VDD
+                        // channel = ANS3 (11)
+                        //ADFM = 1 (Right justified)
+                        //ADON =1 (star convertion)
+
+    GO_DONE = 1; //stars convertion 
+
+    while(GO_DONE == 1){
+        continue;
+    }
+
+    unsigned int result = (ADRESH<<8) | ADRESL; //result is a 
+
+    unsigned int random_number = (result % 6) +1;  //module 6 of any number is a number between 0 to 5, so we sum 1
+
+    return random_number;
+
 }
