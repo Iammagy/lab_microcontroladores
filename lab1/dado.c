@@ -5,7 +5,6 @@ word __at 0x2007 __CONFIG = (_WDTE_OFF);
 
 unsigned int random_noise(void);
 
-
 void main(void)
 {
 
@@ -17,7 +16,6 @@ void main(void)
     {
         switch (number)
         {
-
         case 1:
         GPIO = 0b00000001;
         break;
@@ -55,7 +53,7 @@ unsigned int random_noise(void){
     TRISIO = 0b00010000; //set pin 4 as input
 	ANSEL = 0b01111000; // pin 4 as analog
 
-    ADCON0 = 0b00001101; // VCFG= VDD
+    ADCON0 = 0b10001101; // VCFG= VDD
                         // channel = ANS3 (11)
                         //ADFM = 1 (Right justified)
                         //ADON =1 (star convertion)
