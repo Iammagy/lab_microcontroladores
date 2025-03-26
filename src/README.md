@@ -31,4 +31,5 @@ make clean
 
 - `dado.c`: Código fuente del programa.  
 - `Makefile`: Reglas de compilación.  
+- `dado.simu`: Archivo de simulación.
 - `README.md`: Este documento.  
